@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<!-- 리액트 사용할 때 반드시 아래의 스크립트는 필요하다. -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- 리액트 규칙은 HTML코드를 사용하지 않는다. element를 생성하는 방법을 이용한다.  -->
+<!-- JSX를 통해서 다시 html로 번역함. 설정을 해줘야 할게 많네. -->
+<script type="text/babel">
+
+    const root = document.getElementById("root")
+    const Title = ()=> (<h3 id="title" onMouseEnter={()=>console.log("mouse enter")}>
+        Hello I'm title
+        </h3>);
+
+    const Button = ()=> ( <button style={{backgroundColor:"tomato",}}onClick={()=>console.log("im clicked")}>
+        click me
+        </button>);
+    const Container = ()=>(<div>
+        <Title /> 
+        <Button /> 
+        </div>);
+        // 반드시 첫글자는 대문자로 사용해야함 아니면 일반 html 요소로 인식하게 됩니다.
+    
+    ReactDOM.render(<Container />, root);
+
+    // function Title(){
+    //     retrun((<h3 id="title" onMouseEnter={()=>console.log("mouse enter")}>
+    //     Hello I'm title
+    //     </h3>);)
+    // }
+
+</script>
+
+</html>
