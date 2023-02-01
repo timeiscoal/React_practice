@@ -19,18 +19,67 @@
 <script type="text/babel">
 
     const root = document.getElementById("root")
-    
-    function App(){
+    function MinuteToHours(){
+
+        const [amount , setAmount] = React.useState(0)
+        const [inverted, setinverted] = React.useState(false)
+        const onChange=(event)=>{
+            setAmount(event.target.value);
+        }
+        const reset = () => setAmount(0)
+
+        const onFlip = () => {
+        reset();
+        setinverted((current)=>!current);
+}
+        
+
         return(
             <div>
-                <h3>Super Converter</h3>
-                <label for="minutes">Minutes</label>
-                <input id="minutes" placeholder="Minute" type="number" />
-                <label for="minutes">Hours</label>
-                <input id="hours" placeholder="Hours" type="number" />
+
+                <label htmlFor="minutes">Minutes</label>
+                <input id="minutes" placeholder="Minute" type="number" value ={inverted ? amount * 60 : amount} onChange={onChange} disabled={inverted} />
+
+                <h4>You want to convert {amount}</h4>
+
+                <label htmlFor="minutes">Hours</label>
+                <input id="hours" placeholder="Hours" type="number" value ={inverted ? amount : Math.round(amount/60)} disabled={!inverted} onChange={onChange}/>
+
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>{inverted ? "Trun back":"Invert"}</button>
+
             </div>
-    )
+    )}
+    
+    function KmToMiles(){
+        return <h3>KM</h3>
     }
+    
+    function App(){
+        const [index, setIndext] = React.useState("0")
+        const onSelect = (event) => {
+            setIndext(event.target.value);
+        }
+
+        return(
+            <div>
+            
+                <h1> Super Converter</h1>
+                <select value={index} onChange={onSelect} name="" id="">
+                    <option value="100">Select your units</option>
+                    <option value="0"> Minute & Hours</option>
+                    <option value="1"> Km & Miles</option>    
+                </select>
+                <hr/>
+                {index === "100" ? "Please Selete your units": null}
+                {index === "0" ? <MinuteToHours /> : null}
+                {index === "1" ? <KmToMiles /> : null}
+            </div>
+        )
+        
+
+    }
+    
     ReactDOM.render(<App />, root);
     // 반드시 첫글자는 대문자로 사용해야함 아니면 일반 html 요소로 인식하게 됩니다.
 
@@ -43,7 +92,8 @@ data=React.useState()
     console.log(data)
     >>> (2)[undefined,f]
     배열의 첫 번째 값은 초기값이고 , 두 번째 요소는 첫번째 값을 변경하는 함수.
- -->
+    컴포넌트.
+-->
 
 
 
