@@ -21,19 +21,13 @@
     const root = document.getElementById("root")
     
     function App(){
-        const [counter , setCounter] = React.useState(0);
-        const onClicks = () =>{
-            setCounter(counter+1);
-            // setCounter 자동으로 업데이트 리랜더링을 진행해줌.
-            
-        };
-
         return(
             <div>
-            
-                <h3>Total Clicks: {counter}</h3>
-                <button onClick={onClicks}>Click me</button>
-            
+                <h3>Super Converter</h3>
+                <label for="minutes">Minutes</label>
+                <input id="minutes" placeholder="Minute" type="number" />
+                <label for="minutes">Hours</label>
+                <input id="hours" placeholder="Hours" type="number" />
             </div>
     )
     }
