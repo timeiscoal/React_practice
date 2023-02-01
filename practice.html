@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습</title>
+</head>
+<body>
+    <div id = "practice"></div>
+
+    
+
+</body>
+
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel"> 
+// react를 해석해주는 역할.
+
+    const practices = document.getElementById("practice")
+
+    let counter = 0;
+
+    function CountUp(){
+        counter = counter + 1;
+        reRender()
+    }
+
+
+    function reRender(){
+        ReactDOM.render(<Container />, practices)
+    }
+
+    function Container() {
+        return(
+            
+        <div>
+            <h3>Total Click : {counter}</h3>
+            <button onClick={CountUp}>click me</button>
+        </div>
+
+        )
+    }
+
+    ReactDOM.render(<Container /> , practices)
+
+</script>
+
+</html>
