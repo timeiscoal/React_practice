@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<!-- 리액트 사용할 때 반드시 아래의 스크립트는 필요하다. -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- 리액트 규칙은 HTML코드를 사용하지 않는다. element를 생성하는 방법을 이용한다.  -->
+<!-- JSX를 통해서 다시 html로 번역함. 설정을 해줘야 할게 많네. -->
+<script type="text/babel">
+
+    // props 방식.
+    const root = document.getElementById("root")
+
+    function Btn({potato , changes}){
+        console.log(potato)
+        return <button onClick={changes}
+        style={{
+            backgroundColor:"tomato",
+            color:"white",
+            padding:"10px 20px",
+            border:0,
+            borderRadius:10,
+        }}>{potato}</button>
+
+    }
+    //  re-render를 할 때 변경사항이 있는 친구들만 다시 re-render해주기.
+    const MemorizedBtn = React.memo(Btn);
+    function App(){
+        const [value , setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
+
+        return(
+            <div>
+                <MemorizedBtn potato={value} changes={changeValue} />
+                <MemorizedBtn potato="Continue" />
+            </div>
+        )
+
+    }
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>
+
