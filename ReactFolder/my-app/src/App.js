@@ -1,35 +1,36 @@
 import { useState , useEffect} from "react";
 
-// useEffect  첫번째 argument는 한번만 실행되는 녀석을 넣어준다.
-// useEffect 두번째 argument는 첫번째 argument가 실행되는 조건을 넣어준다 두 번째 argument에서 이벤트가 발생하면 첫번째 argument가 실행된다.. and &&
+// 컨포넌트가 사라지거나 없어 질때의 반응 또한 만들 수 있다. return () => 
+function Hello(){
+  function byFn(){
+    console.log("bye :(")
+  }
+
+  function effectFn(){
+    console.log("Create :)");
+    return byFn
+  }
+  useEffect(effectFn,[])
+  return <h1>Hello</h1>
+}
 
 function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("")
-  const counting = () => setValue((counters)=>counters+1)
-  const onChange= (event) =>{setKeyword(event.target.value)};
-  console.log("restart");
-  const iRunOnlyOnce = ()=>{
-    console.log("only_one");
+  const [showing,setShowing] = useState(false);
+  const onClick=()=>{
+    setShowing((prev)=>!prev)
   }
 
-  useEffect(iRunOnlyOnce, [])
-  useEffect(() =>{
-    if (keyword !== "" && keyword.length > 5)
-    {console.log("Serch For" , keyword)
-  }
-    }
-    , [keyword]
-    )
-  
-  
   return (
     <div>
-      <input value={keyword} onChange={onChange} type="text" placeholder="Serch Here!" />
-      <h2>{counter}</h2>
-      <button onClick={counting}>  click me</button> 
 
+    <h1>Hello World</h1>
+
+    {showing ? <Hello /> : null}  
+    <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+    
     </div>
+
+    
   );
 }
 
