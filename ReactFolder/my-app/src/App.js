@@ -1,36 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
 function App() {
 
-  // todo
-  const [toDo, setToDo] = useState("")
-  // todo list
-  const [toDos, setToDos] = useState([]);
-  const onChange = (event) => setToDo(event.target.value);
-  const onSubmit = (event) => {event.preventDefault(); 
-    if (toDo ===""){
-      return;
-    };
-    setToDo("");
-    setToDos((currentArray)=> [toDo , ...currentArray]);
-  };
+  const [loading, setLoding] = useState(true);
+  const [coins, setCoins] = useState([])
+  const [myMoney , setMyMoney] = useState(0);
+  const [getCoin, setGetCoin] = useState(0);
 
-  return (
-    <div>
-      <h1>My To Do list : {toDos.length}</h1>
-      <form onSubmit={onSubmit}>
-        <input  onChange={onChange} value={toDo}  type="text" placeholder="Write your to do" />
-        
-        <button>Add To Do List</button>
+  useEffect(()=> {
+    fetch("https://api.coinpaprika.com/v1/tickers/")
+    .then((response)=>response.json())
+    .then((json)=>{
+      setCoins(json);
+      setLoding(false);
+    }
+    );
+  },[])
+  const writeMoney = (money) => setMyMoney(money.target.value);
+  const selectCoin = (coin) => setGetCoin(coin.target.value);
 
+  return ( 
+    <div> 
 
-      </form>
-      <hr/>
-      <ul>
-        {toDos.map((item, index) => <li key={index}>{item}</li>)}
-      </ul>
+        <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
+
+        내가 가진 Dollar
+        <input  type="number" placeholder="보유 금액" value={myMoney} onChange={writeMoney} />
+
+        {loading ? <strong> Loading</strong> :
+        <select onChange={selectCoin}>
+          <option key ="-1">
+            select Coin
+          </option>
+
+          {coins.map((coin)=> 
+          <option key={coin.id} value={coin.quotes.USD.price}>
+
+            {coin.name}({coin.symbol}) : &{(coin.quotes.USD.price).toFixed(2)}
+
+          </option>)}
+        </select>}
+        <div>
+          <h2> Coin you can buy : {getCoin > 0  ? (myMoney / getCoin).toFixed(2)+"개" : ""} </h2>
+        </div>
 
     </div>
 
