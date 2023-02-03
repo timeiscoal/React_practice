@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/React_practice.git/static/js/main.d4d6acf9.js",
-    "index.html": "/React_practice.git/index.html",
-    "main.d4d6acf9.js.map": "/React_practice.git/static/js/main.d4d6acf9.js.map"
+    "main.js": "/React_practice/static/js/main.d4d6acf9.js",
+    "index.html": "/React_practice/index.html",
+    "main.d4d6acf9.js.map": "/React_practice/static/js/main.d4d6acf9.js.map"
   },
   "entrypoints": [
     "static/js/main.d4d6acf9.js"
