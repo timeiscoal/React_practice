@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Movie from "./components/movie";
+import Movie from "../components/movie";
 
 
 function Home(){
@@ -20,6 +20,7 @@ function Home(){
           <div>
             {movies.map((movie)=>(<Movie
             key={movie.id}
+            id={movie.id}
             movieImg={movie.large_cover_image} 
             title={movie.title}
             summary={movie.summary}
@@ -32,5 +33,4 @@ function Home(){
     );
     
 }
-
 export default Home;
